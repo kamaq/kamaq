@@ -30,6 +30,11 @@
 
 	<!--Mention here all model classes along with their package name -->
         <mapping class ="com.raw.kamaq.model.User" />
+        <mapping class ="com.raw.kamaq.model.Module" />
+        <mapping class ="com.raw.kamaq.model.Component" />
+        <mapping class ="com.raw.kamaq.model.Function" />
+        <mapping class ="com.raw.kamaq.model.Profile" />
+        <mapping class ="com.raw.kamaq.model.ProfileDetail" />
 
     </session-factory>
 </hibernate-configuration>
