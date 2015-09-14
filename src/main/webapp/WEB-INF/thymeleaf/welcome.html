@@ -1,68 +1,90 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 
-<head th:replace="fragments/headTag :: headTag">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Development Software PM</title>
+<head> 
+<!--  >th:replace="fragments/headTag :: headTag">-->
+<title>Development Software PM</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" ></meta>
+<!-- width=device-width, initial-scale=1, -->
+	  
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"></link>
+<link rel="stylesheet" href="w3-theme-red.css"></link>
 
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/2.3.0/css/bootstrap.min.css}" rel="stylesheet" />
-    <link href="../../resources/css/petclinic.css"
-          th:href="@{/resources/css/petclinic.css}" rel="stylesheet" />
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap.min.css"
+      th:href="@{/webjars/bootstrap/2.3.0/css/bootstrap.min.css}" rel="stylesheet" />
+<link href="../../resources/css/petclinic.css"
+      th:href="@{/resources/css/petclinic.css}" rel="stylesheet" />
     
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
-            th:src="@{/webjars/jquery/1.9.0/jquery.js}"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"
-            th:src="@{/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.js}"></script>
-    
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css"
-          th:href="@{/webjars/jquery-ui/1.9.2/css/smoothness/jquery-ui-1.9.2.custom.css}" rel="stylesheet" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
+        th:src="@{/webjars/jquery/1.9.0/jquery.js}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"
+        th:src="@{/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.js}"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css"
+      th:href="@{/webjars/jquery-ui/1.9.2/css/smoothness/jquery-ui-1.9.2.custom.css}" rel="stylesheet" />
+
 </head>
 
 <body>
-<div class="container">
 
-    <div th:include="fragments/bodyHeader" th:remove="tag">
-    
-        <img th:src="@{/resources/images/banner-graphic.png}" 
-             src="../../resources/images/banner-graphic.png"/>
-        
-        <div class="navbar" style="width: 601px;">
-            <div class="navbar-inner">
-                <ul class="nav">
-                    <li style="width: 100px;"><a href="#" th:href="@{/}"><i class="icon-home"></i>Home</a></li>
-                    <li style="width: 130px;"><a href="./owners/findOwners.html" th:href="@{/owners/find.html}">
-                       <i class="icon-search"></i>Sign out</a></li>
-                    <li style="width: 140px;"><a href="./vets/vetList.html" th:href="@{/vets.html}"><i class="icon-th-list">
-			</i>Language</a></li>
-                    <li style="width: 90px;"><a href="./exception.html" th:href="@{/oups.html}" title="trigger a RuntimeException to see how it is handled"><i class="icon-warning-sign"></i>Support</a></li>
-                    <li style="width: 80px;"><a href="#" title="not available yet. Work in progress!!"><i class=" icon-question-sign"></i>Help</a></li>
-                </ul>
-            </div>
-        </div>
-            
-            
-    </div>
+<!-- Header -->
+<header class="w3-container w3-theme w3-padding w3-red" id="myHeader">
+  <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-opennav"></i> 
+  <div class="w3-center">
+  <h5>DEVELOPMENT PROJECT MANAGER</h5>
+  <h1 class="w3-animate-bottom">KAMAQ</h1>
+  </div>
+</header>
 
-    <h3 th:text="#{welcome}">Welcome</h3>
-    
-    <h4 th:text="${serverTime}">serverTime</h4>
 
-    <img src="../../resources/images/pets.png" th:src="@{/resources/images/pets.png}" />
-
-    <table th:replace="fragments/footer :: footer" class="footer">
-        <tr>
-            <td></td>
-            <td align="right">
-               <img src="../../resources/images/springsource-logo.png"
-                    th:src="@{/resources/images/springsource-logo.png}"
-                    alt="Sponsored by SpringSource" />
-            </td>
-        </tr>
-    </table>
-
+<div class="w3-row-padding w3-center w3-margin-top">
+<div class="w3-half">
+	<h3 th:text="#{welcome}">Welcome</h3>
+	<h4 th:text="${serverTime}">serverTime</h4>
+	
+		<img th:src="@{/resources/images/kamaq_logo.png}"
+		     src="../../resources/images/kamaq_logo.png" />
+	
 </div>
-</body>
+<div class="w3-row-padding">
+<div class="w3-half">
 
+<form class="w3-container w3-card-4">
+  <h2>Login</h2>
+  <div class="w3-group">      
+    <input class="w3-input" type="text" style="width:95%" required="true"></input>
+    <label class="w3-label">User name</label>
+  </div>
+  <div class="w3-group">      
+    <input class="w3-input" type="text" style="width:95%" required="true"></input>
+    <label class="w3-label">Password</label>
+  </div>
+  <div class="w3-group">      
+    <textarea class="w3-input" style="width:95%"></textarea>
+    <label class="w3-label">Subject</label>
+  </div>
+  <a class="w3-btn">Sign in</a>
+  <a class="w3-btn w3-theme">Register</a>
+  <br> </br>
+</form>
+</div>
+</div>
+</div>
+
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-dark w3-red">
+  <h4>A RAW&trade; application</h4>
+  <p>All rights reserved - &reg;2015
+  <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-theme-dark">Go To Top</span>&nbsp;   
+    <a class="w3-text-white" href="#myHeader"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+  </p>
+</footer>
+
+
+<script src="/lib/w3codecolors.js"></script> 
+</body>
 </html>
