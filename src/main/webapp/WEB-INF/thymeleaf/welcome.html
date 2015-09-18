@@ -39,31 +39,35 @@
 
 <div class="w3-row-padding w3-center w3-margin-top">
 <div class="w3-half">
-	<h3 th:text="#{welcome}">Welcome</h3>
+	<!-- <h3 th:text="#{welcome}">Welcome</h3> -->
 	<h4 th:text="${serverTime}">serverTime</h4>
 	
-		<img th:src="@{/resources/images/kamaq_logo.png}"
-		     src="../../resources/images/kamaq_logo.png" />
+	<img th:src="@{/resources/images/kamaq_logo.png}"
+	     src="../../resources/images/kamaq_logo.png" />
 	
 </div>
 <div class="w3-row-padding">
 <div class="w3-half">
 
-<form class="w3-container w3-card-4">
-  <h2>Login</h2>
+<form class="w3-container w3-card-4" action="/kamaq/submitLoginForm.html" 
+      method="post">
+  <h3>Login</h3>
   <div class="w3-group">      
-    <input class="w3-input" type="text" style="width:95%" required="true"></input>
+    <select class="w3-select" type="text" style="width:95%" required="true">
+	    <option value="" disabled="true" selected="true">Language</option>
+	    <option value="eng">English</option>
+  		<option value="spa">Spanish</option>
+    </select>
+  </div>
+  <div class="w3-group">      
+    <input name="username" class="w3-input" type="text" style="width:95%" required="true"></input>
     <label class="w3-label">User name</label>
   </div>
   <div class="w3-group">      
-    <input class="w3-input" type="text" style="width:95%" required="true"></input>
+    <input name="password" class="w3-input" type="password" style="width:95%" required="true"></input>
     <label class="w3-label">Password</label>
   </div>
-  <div class="w3-group">      
-    <textarea class="w3-input" style="width:95%"></textarea>
-    <label class="w3-label">Subject</label>
-  </div>
-  <a class="w3-btn">Sign in</a>
+  <button type="submit" class="w3-btn">Sign in</button>
   <a class="w3-btn w3-theme">Register</a>
   <br> </br>
 </form>
