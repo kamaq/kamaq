@@ -35,13 +35,13 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-		return "welcome";
+		return "/login/login";
 	}
 
 	@RequestMapping(value = "/submitLoginForm.html", method = RequestMethod.POST)
 	public ModelAndView submitAdmissionController(@RequestParam(value = "username") String username,
 			@RequestParam("password") String password) {
-		ModelAndView model = new ModelAndView("main");
+		ModelAndView model = new ModelAndView("/main/welcome");
 		model.addObject("msg", "user: " + username + " pass:" + password);
 		return model;
 	}
