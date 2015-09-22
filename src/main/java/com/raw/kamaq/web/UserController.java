@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.raw.kamaq.model.Module;
 import com.raw.kamaq.model.User;
 import com.raw.kamaq.service.UserService;
 
@@ -20,11 +21,13 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value = "/users/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/users/new", method = RequestMethod.GET)
 	public String processCreationUser() {
-		User user = new User();
-		user.setName("734800 sp dy");
-		this.userService.saveUser(user);
-		return "/login/login";
+		Module module = new Module();
+		module.setName("734800 sp dy");
+		this.userService.saveModule(module);
+
+		System.out.println("usuario: " + (this.userService.findUserById(1)).getName());
+		return "/main/welcome";
 	}
 }

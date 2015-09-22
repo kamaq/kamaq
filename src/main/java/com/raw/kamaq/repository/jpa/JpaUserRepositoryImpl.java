@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.raw.kamaq.model.Module;
 import com.raw.kamaq.model.User;
 import com.raw.kamaq.repository.UserRepository;
 
@@ -35,7 +36,14 @@ public class JpaUserRepositoryImpl implements UserRepository {
 
 	@Override
 	public void saveUser(User user) throws DataAccessException {
+		System.out.println("merging jpa.......");
 		this.em.merge(user);
+	}
+
+	@Override
+	public void saveModule(Module module) throws DataAccessException {
+		System.out.println("merging jpa. module......");
+		this.em.merge(module);
 	}
 
 }

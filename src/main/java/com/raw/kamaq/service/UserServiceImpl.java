@@ -5,6 +5,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.raw.kamaq.model.Module;
 import com.raw.kamaq.model.User;
 import com.raw.kamaq.repository.UserRepository;
 
@@ -27,6 +28,12 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void saveUser(User user) throws DataAccessException {
 		userRepository.saveUser(user);
+	}
+
+	@Override
+	@Transactional
+	public void saveModule(Module module) throws DataAccessException {
+		userRepository.saveModule(module);
 	}
 
 	@Override
