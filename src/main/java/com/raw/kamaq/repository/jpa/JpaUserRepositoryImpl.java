@@ -6,9 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.raw.kamaq.model.Module;
 import com.raw.kamaq.model.User;
 import com.raw.kamaq.repository.UserRepository;
 
@@ -34,17 +34,17 @@ public class JpaUserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public void saveUser(User user) {
-		System.out.println("merging jpa.......");
+	public void save(User user) {
 		this.em.merge(user);
 	}
 
 	@Override
-	public void saveModule(Module module) {
-		System.out.println("merging jpa. module......");
-		// this.em.getTransaction().begin();
-		this.em.merge(module);
-		// this.em.getTransaction().commit();
+	public Collection<User> findByNameAndPassword(String name, String password) throws DataAccessException {
+		Query query = this.em
+				.createQuery("SELECT user FROM User user WHERE user.name =:name and user.password =:password ");
+		query.setParameter("name", name);
+		query.setParameter("password", password);
+		return query.getResultList();
 	}
 
 }
