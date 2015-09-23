@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.raw.kamaq.model.Module;
@@ -21,29 +20,31 @@ public class JpaUserRepositoryImpl implements UserRepository {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<User> findByName(String name) throws DataAccessException {
+	public Collection<User> findByName(String name) {
 		Query query = this.em.createQuery("SELECT DISTINCT user FROM User user where user.name like :name ");
 		query.setParameter("name", name + "%");
 		return query.getResultList();
 	}
 
 	@Override
-	public User findById(int id) throws DataAccessException {
+	public User findById(int id) {
 		Query query = this.em.createQuery("SELECT user from User user where user.id =:id");
 		query.setParameter("id", id);
 		return (User) query.getSingleResult();
 	}
 
 	@Override
-	public void saveUser(User user) throws DataAccessException {
+	public void saveUser(User user) {
 		System.out.println("merging jpa.......");
 		this.em.merge(user);
 	}
 
 	@Override
-	public void saveModule(Module module) throws DataAccessException {
+	public void saveModule(Module module) {
 		System.out.println("merging jpa. module......");
+		// this.em.getTransaction().begin();
 		this.em.merge(module);
+		// this.em.getTransaction().commit();
 	}
 
 }

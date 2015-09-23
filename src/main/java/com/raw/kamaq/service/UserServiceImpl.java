@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository) throws DataAccessException {
+	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = false)
 	public void saveUser(User user) throws DataAccessException {
 		userRepository.saveUser(user);
 	}
