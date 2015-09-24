@@ -45,9 +45,12 @@
             
     </div>
 
-    <h3 th:text="#{welcome}">Welcome</h3>
-    
+    <h2 th:text="#{welcome}">Welcome</h2>
+  
     <h4 th:text="${msg}">serverTime</h4>
+    
+    <h3 th:text="${locale}"> locale current</h3>
+
 
     <img src="../../resources/images/pets.png" th:src="@{/resources/images/pets.png}" />
 
