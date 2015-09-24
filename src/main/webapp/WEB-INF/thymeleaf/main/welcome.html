@@ -23,37 +23,12 @@
 <body>
 <div class="container">
 
-    <div th:include="fragments/bodyHeader" th:remove="tag">
-    
-        <img th:src="@{/resources/images/banner-graphic.png}" 
-             src="../../resources/images/banner-graphic.png"/>
-        
-        <div class="navbar" style="width: 601px;">
-            <div class="navbar-inner">
-                <ul class="nav">
-                    <li style="width: 100px;"><a href="#" th:href="@{/}"><i class="icon-home"></i>Home</a></li>
-                    <li style="width: 130px;"><a href="./owners/findOwners.html" th:href="@{/owners/find.html}">
-                       <i class="icon-search"></i>Sign out</a></li>
-                    <li style="width: 140px;"><a href="./vets/vetList.html" th:href="@{/vets.html}"><i class="icon-th-list">
-			</i>Language</a></li>
-                    <li style="width: 90px;"><a href="./exception.html" th:href="@{/oups.html}" title="trigger a RuntimeException to see how it is handled"><i class="icon-warning-sign"></i>Support</a></li>
-                    <li style="width: 80px;"><a href="#" title="not available yet. Work in progress!!"><i class=" icon-question-sign"></i>Help</a></li>
-                </ul>
-            </div>
-        </div>
-            
-            
-    </div>
-
     <h2 th:text="#{welcome}">Welcome</h2>
   
-    <h4 th:text="${msg}">serverTime</h4>
-    
-    <h3 th:text="${locale}"> locale current</h3>
-
-
-    <img src="../../resources/images/pets.png" th:src="@{/resources/images/pets.png}" />
-
+    <h4 th:text="${msg}">email user</h4>
+   
+    <a href="../main/menu.html" h:href="@{/}"><span class="glyphicon glyphicon-menu"></span> m </a>
+   
     <table th:replace="fragments/footer :: footer" class="footer">
         <tr>
             <td></td>

@@ -33,12 +33,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/users/authenticate", method = RequestMethod.POST)
-	public ModelAndView processValidationUser(@RequestParam(value = "username") String name,
-			@RequestParam(value = "password") String password, SessionStatus status,
-			@RequestParam(value = "language") String language, Locale locale, HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView processValidationUser(@RequestParam(value = "language") String language,
+			@RequestParam(value = "username") String name, @RequestParam(value = "password") String password,
+			SessionStatus status, Locale locale, HttpServletRequest request, HttpServletResponse response) {
 
-		// locale = (new Locale(language));
 		localeResolver.setLocale(request, response, new Locale(language));
 
 		Collection<User> results = this.applicationService.authenticateUser(name, password);
@@ -48,8 +46,7 @@ public class UserController {
 			status.setComplete();
 			User user = results.iterator().next();
 			ModelAndView model = new ModelAndView("/main/welcome");
-			model.addObject("msg", "bienvenido: " + user.getEmail());
-			model.addObject("locale", locale);
+			model.addObject("msg", user.getEmail());
 			return model;
 		}
 	}
