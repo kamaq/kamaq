@@ -14,3 +14,8 @@ INSERT INTO module VALUES (5,'Tools for manager application','','Manufacture');
 INSERT INTO module VALUES (6,'Tools for manager application','','Human Resource');
 INSERT INTO module VALUES (7,'Tools for manager application','','Management');
 INSERT INTO module VALUES (8,'Tools for manager application','','Quality');
+
+INSERT INTO component VALUES (1,'main/userForm','User Management','/kamaq/resources/images/menu/User.png','User Editor',1);
+INSERT INTO component VALUES (2,'main/moduleForm','Module Management','/kamaq/resources/images/menu/Module.png','Module Editor',1);
+INSERT INTO component VALUES (3,'main/componentForm','Component Management','/kamaq/resources/images/menu/Component.png','Component Editor',1);
+INSERT INTO component VALUES (4,'main/functionForm','Function Management','/kamaq/resources/images/menu/Function.png','Function Editor',1);

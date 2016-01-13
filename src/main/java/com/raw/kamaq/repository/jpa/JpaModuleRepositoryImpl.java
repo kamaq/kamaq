@@ -36,5 +36,11 @@ public class JpaModuleRepositoryImpl implements ModuleRepository {
 	public void save(Module module) {
 		this.em.merge(module);
 	}
+	
+	public Collection<Module> getListAllModules() {
+		Query query = this.em.createQuery("SELECT module FROM Module module ");
+		return query.getResultList();
+	}
+
 
 }

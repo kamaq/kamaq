@@ -26,20 +26,8 @@
 
 <body>
 <div class="container">
-    <h3 th:text="#{menu}">Menu</h3>
 
-
-    <div th:each="component : ${components}">
-    	<div class="col span_1_of_8 grow pic" th:onclick="${'location.href=''../' + component.classname + ''';'}">
-			<!-- onclick="location.href='../';">   <img th:src="@{/resources/images/menu/Component.png}" src="../../resources/images/menu/Component.png"/>  -->
-			<img th:src="${component.imageFileName}"
-		    	 src="../../resources/images/menu/Component.png"/>
-		    <div align="center"> <p class="serif" th:text="${component.name}">Component</p> </div>
-		</div>
-    </div>
-
-
-    <h1>Component list</h1>
+    <h1>Function Form</h1>
     <table>
       <tr>
         <th>Name</th>

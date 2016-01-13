@@ -7,8 +7,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.raw.kamaq.model.Component;
 import com.raw.kamaq.model.Module;
 import com.raw.kamaq.model.User;
+import com.raw.kamaq.repository.ComponentRepository;
 import com.raw.kamaq.repository.ModuleRepository;
 import com.raw.kamaq.repository.UserRepository;
 
@@ -17,11 +19,25 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	private UserRepository userRepository;
 	private ModuleRepository moduleRepository;
+	private ComponentRepository componentRepository;
 
 	@Autowired
-	public ApplicationServiceImpl(UserRepository userRepository, ModuleRepository moduleRepository) {
+	public ApplicationServiceImpl(UserRepository userRepository, ModuleRepository moduleRepository,
+			ComponentRepository componentRepository) {
+
 		this.userRepository = userRepository;
 		this.moduleRepository = moduleRepository;
+		this.componentRepository = componentRepository;
+	}
+
+	@Override
+	public Collection<Module> getModuleList() throws DataAccessException {
+		return this.moduleRepository.getListAllModules();
+	}
+
+	@Override
+	public Collection<Component> getComponentList() throws DataAccessException {
+		return this.componentRepository.getListAllComponents();
 	}
 
 	@Override

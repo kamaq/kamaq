@@ -9,6 +9,8 @@ import com.raw.kamaq.model.Module;
 public interface ModuleRepository {
 
 	Collection<Module> findByName(String name) throws DataAccessException;
+	
+	Collection<Module> getListAllModules() throws DataAccessException;
 
 	Module findById(int id) throws DataAccessException;
 

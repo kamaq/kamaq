@@ -50,6 +50,7 @@ CREATE SCHEMA public;
 
 
 ALTER SCHEMA public OWNER TO postgres;
+-- postgres;
 
 --
 -- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
@@ -65,7 +66,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: component; Type: TABLE; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: component; Type: TABLE; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 CREATE TABLE component (
@@ -78,10 +79,10 @@ CREATE TABLE component (
 );
 
 
-ALTER TABLE component OWNER TO khipuuser;
+ALTER TABLE component OWNER TO kamaq_user;
 
 --
--- Name: component_componentid_seq; Type: SEQUENCE; Schema: public; Owner: khipuuser
+-- Name: component_componentid_seq; Type: SEQUENCE; Schema: public; Owner: kamaq_user
 --
 
 CREATE SEQUENCE component_componentid_seq
@@ -92,17 +93,17 @@ CREATE SEQUENCE component_componentid_seq
     CACHE 1;
 
 
-ALTER TABLE component_componentid_seq OWNER TO khipuuser;
+ALTER TABLE component_componentid_seq OWNER TO kamaq_user;
 
 --
--- Name: component_componentid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: khipuuser
+-- Name: component_componentid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kamaq_user
 --
 
 ALTER SEQUENCE component_componentid_seq OWNED BY component.componentid;
 
 
 --
--- Name: function; Type: TABLE; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: function; Type: TABLE; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 CREATE TABLE function (
@@ -112,10 +113,10 @@ CREATE TABLE function (
 );
 
 
-ALTER TABLE function OWNER TO khipuuser;
+ALTER TABLE function OWNER TO kamaq_user;
 
 --
--- Name: function_functionid_seq; Type: SEQUENCE; Schema: public; Owner: khipuuser
+-- Name: function_functionid_seq; Type: SEQUENCE; Schema: public; Owner: kamaq_user
 --
 
 CREATE SEQUENCE function_functionid_seq
@@ -126,17 +127,17 @@ CREATE SEQUENCE function_functionid_seq
     CACHE 1;
 
 
-ALTER TABLE function_functionid_seq OWNER TO khipuuser;
+ALTER TABLE function_functionid_seq OWNER TO kamaq_user;
 
 --
--- Name: function_functionid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: khipuuser
+-- Name: function_functionid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kamaq_user
 --
 
 ALTER SEQUENCE function_functionid_seq OWNED BY function.functionid;
 
 
 --
--- Name: module; Type: TABLE; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: module; Type: TABLE; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 CREATE TABLE module (
@@ -147,10 +148,10 @@ CREATE TABLE module (
 );
 
 
-ALTER TABLE module OWNER TO khipuuser;
+ALTER TABLE module OWNER TO kamaq_user;
 
 --
--- Name: module_moduleid_seq; Type: SEQUENCE; Schema: public; Owner: khipuuser
+-- Name: module_moduleid_seq; Type: SEQUENCE; Schema: public; Owner: kamaq_user
 --
 
 CREATE SEQUENCE module_moduleid_seq
@@ -161,17 +162,17 @@ CREATE SEQUENCE module_moduleid_seq
     CACHE 1;
 
 
-ALTER TABLE module_moduleid_seq OWNER TO khipuuser;
+ALTER TABLE module_moduleid_seq OWNER TO kamaq_user;
 
 --
--- Name: module_moduleid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: khipuuser
+-- Name: module_moduleid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kamaq_user
 --
 
 ALTER SEQUENCE module_moduleid_seq OWNED BY module.moduleid;
 
 
 --
--- Name: profile; Type: TABLE; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: profile; Type: TABLE; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 CREATE TABLE profile (
@@ -181,10 +182,10 @@ CREATE TABLE profile (
 );
 
 
-ALTER TABLE profile OWNER TO khipuuser;
+ALTER TABLE profile OWNER TO kamaq_user;
 
 --
--- Name: profile_detail; Type: TABLE; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: profile_detail; Type: TABLE; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 CREATE TABLE profile_detail (
@@ -196,10 +197,10 @@ CREATE TABLE profile_detail (
 );
 
 
-ALTER TABLE profile_detail OWNER TO khipuuser;
+ALTER TABLE profile_detail OWNER TO kamaq_user;
 
 --
--- Name: profile_profileid_seq; Type: SEQUENCE; Schema: public; Owner: khipuuser
+-- Name: profile_profileid_seq; Type: SEQUENCE; Schema: public; Owner: kamaq_user
 --
 
 CREATE SEQUENCE profile_profileid_seq
@@ -210,17 +211,17 @@ CREATE SEQUENCE profile_profileid_seq
     CACHE 1;
 
 
-ALTER TABLE profile_profileid_seq OWNER TO khipuuser;
+ALTER TABLE profile_profileid_seq OWNER TO kamaq_user;
 
 --
--- Name: profile_profileid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: khipuuser
+-- Name: profile_profileid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kamaq_user
 --
 
 ALTER SEQUENCE profile_profileid_seq OWNED BY profile.profileid;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 CREATE TABLE users (
@@ -232,10 +233,10 @@ CREATE TABLE users (
 );
 
 
-ALTER TABLE users OWNER TO khipuuser;
+ALTER TABLE users OWNER TO kamaq_user;
 
 --
--- Name: users_profile; Type: TABLE; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: users_profile; Type: TABLE; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 CREATE TABLE users_profile (
@@ -244,10 +245,10 @@ CREATE TABLE users_profile (
 );
 
 
-ALTER TABLE users_profile OWNER TO khipuuser;
+ALTER TABLE users_profile OWNER TO kamaq_user;
 
 --
--- Name: users_userid_seq; Type: SEQUENCE; Schema: public; Owner: khipuuser
+-- Name: users_userid_seq; Type: SEQUENCE; Schema: public; Owner: kamaq_user
 --
 
 CREATE SEQUENCE users_userid_seq
@@ -258,103 +259,103 @@ CREATE SEQUENCE users_userid_seq
     CACHE 1;
 
 
-ALTER TABLE users_userid_seq OWNER TO khipuuser;
+ALTER TABLE users_userid_seq OWNER TO kamaq_user;
 
 --
--- Name: users_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: khipuuser
+-- Name: users_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kamaq_user
 --
 
 ALTER SEQUENCE users_userid_seq OWNED BY users.userid;
 
 
 --
--- Name: componentid; Type: DEFAULT; Schema: public; Owner: khipuuser
+-- Name: componentid; Type: DEFAULT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY component ALTER COLUMN componentid SET DEFAULT nextval('component_componentid_seq'::regclass);
 
 
 --
--- Name: functionid; Type: DEFAULT; Schema: public; Owner: khipuuser
+-- Name: functionid; Type: DEFAULT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY function ALTER COLUMN functionid SET DEFAULT nextval('function_functionid_seq'::regclass);
 
 
 --
--- Name: moduleid; Type: DEFAULT; Schema: public; Owner: khipuuser
+-- Name: moduleid; Type: DEFAULT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY module ALTER COLUMN moduleid SET DEFAULT nextval('module_moduleid_seq'::regclass);
 
 
 --
--- Name: profileid; Type: DEFAULT; Schema: public; Owner: khipuuser
+-- Name: profileid; Type: DEFAULT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY profile ALTER COLUMN profileid SET DEFAULT nextval('profile_profileid_seq'::regclass);
 
 
 --
--- Name: userid; Type: DEFAULT; Schema: public; Owner: khipuuser
+-- Name: userid; Type: DEFAULT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY users ALTER COLUMN userid SET DEFAULT nextval('users_userid_seq'::regclass);
 
 
 --
--- Data for Name: component; Type: TABLE DATA; Schema: public; Owner: khipuuser
+-- Data for Name: component; Type: TABLE DATA; Schema: public; Owner: kamaq_user
 --
 
 
 
 --
--- Name: component_componentid_seq; Type: SEQUENCE SET; Schema: public; Owner: khipuuser
+-- Name: component_componentid_seq; Type: SEQUENCE SET; Schema: public; Owner: kamaq_user
 --
 
 SELECT pg_catalog.setval('component_componentid_seq', 1, false);
 
 
 --
--- Data for Name: function; Type: TABLE DATA; Schema: public; Owner: khipuuser
+-- Data for Name: function; Type: TABLE DATA; Schema: public; Owner: kamaq_user
 --
 
 
 
 --
--- Name: function_functionid_seq; Type: SEQUENCE SET; Schema: public; Owner: khipuuser
+-- Name: function_functionid_seq; Type: SEQUENCE SET; Schema: public; Owner: kamaq_user
 --
 
 SELECT pg_catalog.setval('function_functionid_seq', 1, false);
 
 
 --
--- Data for Name: module; Type: TABLE DATA; Schema: public; Owner: khipuuser
+-- Data for Name: module; Type: TABLE DATA; Schema: public; Owner: kamaq_user
 --
 
 
 
 --
--- Name: module_moduleid_seq; Type: SEQUENCE SET; Schema: public; Owner: khipuuser
+-- Name: module_moduleid_seq; Type: SEQUENCE SET; Schema: public; Owner: kamaq_user
 --
 
 SELECT pg_catalog.setval('module_moduleid_seq', 1, false);
 
 
 --
--- Data for Name: profile; Type: TABLE DATA; Schema: public; Owner: khipuuser
+-- Data for Name: profile; Type: TABLE DATA; Schema: public; Owner: kamaq_user
 --
 
 
 
 --
--- Data for Name: profile_detail; Type: TABLE DATA; Schema: public; Owner: khipuuser
+-- Data for Name: profile_detail; Type: TABLE DATA; Schema: public; Owner: kamaq_user
 --
 
 
 
 --
--- Name: profile_profileid_seq; Type: SEQUENCE SET; Schema: public; Owner: khipuuser
+-- Name: profile_profileid_seq; Type: SEQUENCE SET; Schema: public; Owner: kamaq_user
 --
 
 SELECT pg_catalog.setval('profile_profileid_seq', 1, false);
@@ -363,20 +364,20 @@ SELECT pg_catalog.setval('profile_profileid_seq', 1, false);
 
 
 --
--- Data for Name: users_profile; Type: TABLE DATA; Schema: public; Owner: khipuuser
+-- Data for Name: users_profile; Type: TABLE DATA; Schema: public; Owner: kamaq_user
 --
 
 
 
 --
--- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: khipuuser
+-- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: kamaq_user
 --
 
 SELECT pg_catalog.setval('users_userid_seq', 1, true);
 
 
 --
--- Name: component_pkey; Type: CONSTRAINT; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: component_pkey; Type: CONSTRAINT; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 ALTER TABLE ONLY component
@@ -384,7 +385,7 @@ ALTER TABLE ONLY component
 
 
 --
--- Name: function_pkey; Type: CONSTRAINT; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: function_pkey; Type: CONSTRAINT; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 ALTER TABLE ONLY function
@@ -392,7 +393,7 @@ ALTER TABLE ONLY function
 
 
 --
--- Name: module_pkey; Type: CONSTRAINT; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: module_pkey; Type: CONSTRAINT; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 ALTER TABLE ONLY module
@@ -400,7 +401,7 @@ ALTER TABLE ONLY module
 
 
 --
--- Name: profile_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: profile_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 ALTER TABLE ONLY profile_detail
@@ -408,7 +409,7 @@ ALTER TABLE ONLY profile_detail
 
 
 --
--- Name: profile_pkey; Type: CONSTRAINT; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: profile_pkey; Type: CONSTRAINT; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 ALTER TABLE ONLY profile
@@ -416,7 +417,7 @@ ALTER TABLE ONLY profile
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -424,7 +425,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: users_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: khipuuser; Tablespace: 
+-- Name: users_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: kamaq_user; Tablespace: 
 --
 
 ALTER TABLE ONLY users_profile
@@ -432,7 +433,7 @@ ALTER TABLE ONLY users_profile
 
 
 --
--- Name: fk8dgr1j0hg9k5snenv256a7k6g; Type: FK CONSTRAINT; Schema: public; Owner: khipuuser
+-- Name: fk8dgr1j0hg9k5snenv256a7k6g; Type: FK CONSTRAINT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY users_profile
@@ -440,7 +441,7 @@ ALTER TABLE ONLY users_profile
 
 
 --
--- Name: fkcu4q73rl0b1vdk7egvm23cyqm; Type: FK CONSTRAINT; Schema: public; Owner: khipuuser
+-- Name: fkcu4q73rl0b1vdk7egvm23cyqm; Type: FK CONSTRAINT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY profile_detail
@@ -448,7 +449,7 @@ ALTER TABLE ONLY profile_detail
 
 
 --
--- Name: fkk72rcp7q838x167pxlf6l651h; Type: FK CONSTRAINT; Schema: public; Owner: khipuuser
+-- Name: fkk72rcp7q838x167pxlf6l651h; Type: FK CONSTRAINT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY component
@@ -456,7 +457,7 @@ ALTER TABLE ONLY component
 
 
 --
--- Name: fklmo26nq6l3ke2ahmsbkobxq1f; Type: FK CONSTRAINT; Schema: public; Owner: khipuuser
+-- Name: fklmo26nq6l3ke2ahmsbkobxq1f; Type: FK CONSTRAINT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY users_profile
@@ -464,7 +465,7 @@ ALTER TABLE ONLY users_profile
 
 
 --
--- Name: fkmrqyi9ds1evem06bo0r3u1me4; Type: FK CONSTRAINT; Schema: public; Owner: khipuuser
+-- Name: fkmrqyi9ds1evem06bo0r3u1me4; Type: FK CONSTRAINT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY function
@@ -472,7 +473,7 @@ ALTER TABLE ONLY function
 
 
 --
--- Name: fkpdnxgcsuk290sgtk9bho1rcey; Type: FK CONSTRAINT; Schema: public; Owner: khipuuser
+-- Name: fkpdnxgcsuk290sgtk9bho1rcey; Type: FK CONSTRAINT; Schema: public; Owner: kamaq_user
 --
 
 ALTER TABLE ONLY profile_detail

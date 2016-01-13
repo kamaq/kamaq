@@ -16,6 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import com.raw.kamaq.model.Module;
 import com.raw.kamaq.model.User;
 import com.raw.kamaq.service.ApplicationService;
 
@@ -61,4 +62,6 @@ public class UserController {
 		System.out.println("usuario: " + (this.applicationService.findUserById(1)).getName());
 		return "/main/welcome";
 	}
+	
+	
 }

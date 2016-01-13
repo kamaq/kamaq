@@ -27,7 +27,12 @@
   
     <h4 th:text="${msg}">email user</h4>
    
-    <a href="../main/menu.html" h:href="@{/}"><span class="glyphicon glyphicon-menu"></span> m </a>
+    <!-- <a href="../main/menu.html" h:href="@{/}"><span class="glyphicon glyphicon-menu"></span> m </a>  -->
+   
+	<form class="w3-container w3-card-4" action="/kamaq/main/options" method="post">
+	  	<button type="submit" class="w3-btn"><span class="glyphicon glyphicon-off"></span> Menu</button>
+	</form>    
+       
    
     <table th:replace="fragments/footer :: footer" class="footer">
         <tr>
@@ -39,6 +44,10 @@
             </td>
         </tr>
     </table>
+    
+    
+    
+
 
 </div>
 </body>
