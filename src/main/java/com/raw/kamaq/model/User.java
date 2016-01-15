@@ -6,29 +6,28 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.core.style.ToStringCreator;
+
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User extends Person {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "USERID")
-	private int userId;
+	// @Id
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @Column(name = "ID")
+	// private int id;
 
-	@Column(name = "NAME", length = 80)
-	private String name;
+	// @Column(name = "NAME", length = 80)
+	// private String name;
 
 	@Column(name = "PASSWORD", length = 20)
 	private String password;
 
-	@Column(name = "EMAIL", length = 255)
-	private String email;
+	// @Column(name = "EMAIL", length = 255)
+	// private String email;
 
 	@Column(name = "ENABLED")
 	private boolean enabled;
@@ -36,21 +35,21 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Profile> profiles = new HashSet<Profile>();
 
-	public int getUserId() {
-		return userId;
-	}
+	// public Integer getId() {
+	// return id;
+	// }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+	// public void setId(int id) {
+	// this.id = id;
+	// }
 
-	public String getName() {
-		return name;
-	}
+	// public String getName() {
+	// return name;
+	// }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	// public void setName(String name) {
+	// this.name = name;
+	// }
 
 	public String getPassword() {
 		return password;
@@ -60,13 +59,13 @@ public class User {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
-	}
+	// public String getEmail() {
+	// return email;
+	// }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	// public void setEmail(String email) {
+	// this.email = email;
+	// }
 
 	public boolean isEnabled() {
 		return enabled;
@@ -82,6 +81,12 @@ public class User {
 
 	public void setProfile(Set<Profile> profiles) {
 		this.profiles = profiles;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringCreator(this).append("id", this.getId()).append("new", this.isNew())
+				.append("name", this.getName()).append("email", this.getEmail()).toString();
 	}
 
 }

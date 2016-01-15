@@ -5,9 +5,15 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +22,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-import com.raw.kamaq.model.Module;
 import com.raw.kamaq.model.User;
 import com.raw.kamaq.service.ApplicationService;
 
@@ -31,6 +36,11 @@ public class UserController {
 	public UserController(ApplicationService applicationService, SessionLocaleResolver localeResolver) {
 		this.applicationService = applicationService;
 		this.localeResolver = localeResolver;
+	}
+
+	@InitBinder
+	public void setAllowedFields(WebDataBinder dataBinder) {
+		dataBinder.setDisallowedFields("id");
 	}
 
 	@RequestMapping(value = "/users/authenticate", method = RequestMethod.POST)
@@ -52,16 +62,86 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "/users/new", method = RequestMethod.POST)
-	public String processCreationUser(SessionStatus status) {
+	@RequestMapping(value = "/users/new", method = RequestMethod.GET)
+	public String initCreationForm(Model model) {
 		User user = new User();
-		user.setName("san");
-		this.applicationService.saveUser(user);
-		status.setComplete();
-
-		System.out.println("usuario: " + (this.applicationService.findUserById(1)).getName());
-		return "/main/welcome";
+		model.addAttribute(user);
+		return "users/createOrUpdateUserForm";
 	}
-	
-	
+
+	@RequestMapping(value = "/users/new", method = RequestMethod.POST)
+	public String processCreationUser(@Valid User user, BindingResult result, SessionStatus status) {
+		if (result.hasErrors()) {
+			return "users/createOrUpdateUserForm";
+		} else {
+			this.applicationService.saveUser(user);
+			status.setComplete();
+			return "redirect:/users/" + user.getId();
+		}
+	}
+
+	@RequestMapping(value = "/users/find", method = RequestMethod.GET)
+	public String initFindForm(Model model) {
+		model.addAttribute("user", new User());
+		return "users/findUsers";
+	}
+
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public String processFindForm(User user, BindingResult result, Model model) {
+
+		// allow parameterless GET request for /users to return all records
+		if (user.getName() == null) {
+			user.setName(""); // empty string signifies broadest possible search
+		}
+
+		// find users by name
+		Collection<User> results = this.applicationService.findUserByName(user.getName());
+		if (results.size() < 1) {
+			// no users found
+			result.rejectValue("name", "notFound", "not found");
+			return "users/findUsers";
+		}
+		if (results.size() > 1) {
+			// multiple users found
+			model.addAttribute("selections", results);
+			return "users/usersList";
+		} else {
+			// 1 user found
+			user = results.iterator().next();
+			return "redirect:/users/" + user.getId();
+		}
+	}
+
+	@RequestMapping(value = "/users/{userId}/edit", method = RequestMethod.GET)
+	public String initUpdateUserForm(@PathVariable("userId") int userId, Model model) {
+		User user = this.applicationService.findUserById(userId);
+		model.addAttribute(user);
+		return "users/createOrUpdateUserForm";
+	}
+
+	@RequestMapping(value = "/users/{userId}/edit", method = RequestMethod.PUT)
+	public String processUpdateUserForm(@Valid User user, BindingResult result, SessionStatus status) {
+		if (result.hasErrors()) {
+			return "users/createOrUpdateUserForm";
+		} else {
+			this.applicationService.saveUser(user);
+			status.setComplete();
+			return "redirect:/users/{userId}";
+		}
+	}
+
+	/**
+	 * Custom handler for displaying an owner.
+	 *
+	 * @param ownerId
+	 *            the ID of the owner to display
+	 * @return a ModelMap with the model attributes for the view
+	 */
+	@RequestMapping("/users/{userId}")
+	public ModelAndView showUser(@PathVariable("userId") int userId) {
+		ModelAndView mav = new ModelAndView("users/userDetails");
+		mav.addObject(this.applicationService.findUserById(userId));
+		return mav;
+	}
+
 }

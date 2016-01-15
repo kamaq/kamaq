@@ -10,6 +10,8 @@ public interface UserRepository {
 
 	Collection<User> findByName(String name) throws DataAccessException;
 
+	Collection<User> getListAllUsers() throws DataAccessException;
+
 	User findById(int id) throws DataAccessException;
 
 	void save(User user) throws DataAccessException;

@@ -23,6 +23,22 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
           p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
           p:username="${jdbc.username}" p:password="${jdbc.password}"/>
+          
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	    <property name="dataSource"  ref="dataSource" /> 
+	    <property name="packagesToScan">
+	        <list>
+	            <value>com.raw.kamaq.model</value>
+	        </list>
+	    </property>
+	    <property name="hibernateProperties">
+	        <props>
+	            <!-- <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop> -->
+	            <prop key="hibernate.show_sql">true</prop>
+	            <prop key="hibernate.hbm2ddl.auto">create</prop>
+	        </props>
+	    </property>
+	</bean>          
 
     <!-- JNDI DataSource for JEE environments -->
     <!--
@@ -31,9 +47,11 @@
 
     <!-- Database initializer. If any of the script fails, the initialization stops. -->
     <!-- As an alternative, for embedded databases see <jdbc:embedded-database/>. -->
+     
     <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="${jdbc.initLocation}"/>
-        <jdbc:script location="${jdbc.dataLocation}"/>
+         <jdbc:script location="${jdbc.initLocation}"/>  
+         <jdbc:script location="${jdbc.dataLocation}"/>  
     </jdbc:initialize-database>
+
 
 </beans>

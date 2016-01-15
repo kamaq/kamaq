@@ -31,16 +31,15 @@
     <table>
       <tr>
         <th>Name</th>
-        <th>Class Name</th>
-        <th>Image File Name</th>
+        <th>Email</th>
       </tr>
-      <tr th:each="component : ${components}">
-        <td th:text="${component.name}">Onions</td>
-        <td th:text="${component.classname}">2.41</td>
-        <td th:text="${component.imageFileName}">yes</td>
+      <tr th:each="object : ${objects}">
+        <td th:text="${object.name}">Onions</td>
+        <td th:text="${object.email}">2.41</td>
       </tr>
     </table>
 
+<a th:href="@{'/users/new'}" href="createOrUpdateUserForm.html">Add User</a>
 
 </div>
 </body>

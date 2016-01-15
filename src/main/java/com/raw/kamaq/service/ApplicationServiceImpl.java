@@ -31,6 +31,11 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 
 	@Override
+	public Collection<User> getUserList() throws DataAccessException {
+		return this.userRepository.getListAllUsers();
+	}
+
+	@Override
 	public Collection<Module> getModuleList() throws DataAccessException {
 		return this.moduleRepository.getListAllModules();
 	}
@@ -46,7 +51,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional // (readOnly = false)
 	public void saveUser(User user) throws DataAccessException {
 		this.userRepository.save(user);
 	}
@@ -66,6 +71,12 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Override
 	public Module findModuleById(int id) throws DataAccessException {
 		return this.moduleRepository.findById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Collection<User> findUserByName(String name) throws DataAccessException {
+		return userRepository.findByName(name);
 	}
 
 }

@@ -12,10 +12,12 @@ public interface ApplicationService {
 
 	public Collection<User> authenticateUser(String username, String password) throws DataAccessException;
 
+	public Collection<User> getUserList() throws DataAccessException;
+
 	public Collection<Module> getModuleList() throws DataAccessException;
-	
+
 	public Collection<Component> getComponentList() throws DataAccessException;
-	
+
 	public void saveUser(User user) throws DataAccessException;
 
 	public void saveModule(Module module) throws DataAccessException;
@@ -23,4 +25,6 @@ public interface ApplicationService {
 	public User findUserById(int id) throws DataAccessException;
 
 	public Module findModuleById(int id) throws DataAccessException;
+
+	Collection<User> findUserByName(String name) throws DataAccessException;
 }

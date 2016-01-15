@@ -35,7 +35,13 @@ public class JpaUserRepositoryImpl implements UserRepository {
 
 	@Override
 	public void save(User user) {
-		this.em.merge(user);
+		// this.em.merge(user);
+		if (user.getId() == null) {
+			this.em.persist(user);
+		} else {
+			this.em.merge(user);
+		}
+
 	}
 
 	@Override
@@ -44,6 +50,12 @@ public class JpaUserRepositoryImpl implements UserRepository {
 				.createQuery("SELECT user FROM User user WHERE user.name =:name and user.password =:password ");
 		query.setParameter("name", name);
 		query.setParameter("password", password);
+		return query.getResultList();
+	}
+
+	@Override
+	public Collection<User> getListAllUsers() {
+		Query query = this.em.createQuery("SELECT user FROM User user ");
 		return query.getResultList();
 	}
 
