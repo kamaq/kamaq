@@ -24,6 +24,27 @@ PetClinic :: a Spring Framework demonstration
     
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css"
           th:href="@{/webjars/jquery-ui/1.9.2/css/smoothness/jquery-ui-1.9.2.custom.css}" rel="stylesheet" />
+          
+          
+    <link href="../../../resources/css/jquery.dataTables.min.css" 
+    	  th:href="@{/resources/css/jquery.dataTables.min.css}" rel="stylesheet" />
+    <script type="text/javascript" language="javascript"
+    		src="../../../resources/css/jquery.dataTables.min.js" 
+    	    th:src="@{/resources/css/jquery.dataTables.min.js}"/>
+    
+    <!-- <script type="text/javascript" language="javascript" 
+    		src="../../../resources/css/jquery-1.11.3.min.js"
+    		th:src="@{/resources/css/jquery-1.11.3.min.js}"/>    
+    -->    		
+    		
+	<script type="text/javascript" class="init">
+		$(document).ready(function() {
+			$('#example').DataTable( {
+				"scrollY": 200,
+				"scrollX": true
+			} );
+		} );
+	</script>    		         
     
 </head>
 

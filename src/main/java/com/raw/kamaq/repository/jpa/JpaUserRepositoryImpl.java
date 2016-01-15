@@ -35,10 +35,11 @@ public class JpaUserRepositoryImpl implements UserRepository {
 
 	@Override
 	public void save(User user) {
-		// this.em.merge(user);
 		if (user.getId() == null) {
+			// update object user with changes sent to database
 			this.em.persist(user);
 		} else {
+			// no update object user
 			this.em.merge(user);
 		}
 
