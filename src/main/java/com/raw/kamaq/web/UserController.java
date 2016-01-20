@@ -24,6 +24,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.raw.kamaq.model.User;
 import com.raw.kamaq.service.ApplicationService;
+import com.raw.kamaq.util.DataTableConverter;
 
 @Controller
 @SessionAttributes(types = User.class)
@@ -104,6 +105,12 @@ public class UserController {
 		if (results.size() > 1) {
 			// multiple users found
 			model.addAttribute("selections", results);
+			String[] cols = { "id", "name", "email" };
+			DataTableConverter tResults = new DataTableConverter(results, cols);
+			tResults.print();
+			tResults.setColumnAsLink("2.email");
+			tResults.setColumnId("0.id");
+			model.addAttribute("tResults", tResults);
 			return "users/usersList";
 		} else {
 			// 1 user found
