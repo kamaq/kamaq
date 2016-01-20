@@ -66,19 +66,39 @@ public class UserController {
 	@RequestMapping(value = "/users/new", method = RequestMethod.GET)
 	public String initCreationForm(Model model) {
 		User user = new User();
+
+		String[] cols = { "name", "email", "password", "enabled" };
+		DataTableConverter tObject = new DataTableConverter(user, cols);
+		model.addAttribute("tObject", tObject);
+
 		model.addAttribute(user);
 		return "users/createOrUpdateUserForm";
 	}
 
 	@RequestMapping(value = "/users/new", method = RequestMethod.POST)
-	public String processCreationUser(@Valid User user, BindingResult result, SessionStatus status) {
-		if (result.hasErrors()) {
-			return "users/createOrUpdateUserForm";
-		} else {
-			this.applicationService.saveUser(user);
-			status.setComplete();
-			return "redirect:/users/" + user.getId();
+	public String processCreationUser(@Valid User user, BindingResult result, SessionStatus status, Model model,
+			@RequestParam(value = "action", required = true) String action) {
+		String resp = "";
+
+		switch (action) {
+		case "insert":
+			if (result.hasErrors()) {
+				String[] cols = { "name", "email", "password", "enabled" };
+				DataTableConverter tObject = new DataTableConverter(user, cols);
+				model.addAttribute("tObject", tObject);
+				resp = "users/createOrUpdateUserForm";
+			} else {
+				this.applicationService.saveUser(user);
+				status.setComplete();
+				resp = "redirect:/users/" + user.getId();
+			}
+			break;
+		case "cancel":
+			resp = "redirect:/users/";
+			break;
 		}
+		return resp;
+
 	}
 
 	@RequestMapping(value = "/users/find", method = RequestMethod.GET)
@@ -91,25 +111,26 @@ public class UserController {
 	public String processFindForm(User user, BindingResult result, Model model) {
 
 		// allow parameterless GET request for /users to return all records
-		if (user.getName() == null) {
-			user.setName(""); // empty string signifies broadest possible search
-		}
+		// if (user.getName() == null) {
+		// user.setName(""); // empty string signifies broadest possible search
+		// }
 
 		// find users by name
-		Collection<User> results = this.applicationService.findUserByName(user.getName());
-		if (results.size() < 1) {
-			// no users found
-			result.rejectValue("name", "notFound", "not found");
-			return "users/findUsers";
-		}
+		// Collection<User> results =
+		// this.applicationService.findUserByName(user.getName());
+		Collection<User> results = this.applicationService.findUserByName("");
+		// if (results.size() < 1) {
+		// no users found
+		// result.rejectValue("name", "notFound", "not found");
+		// return "users/findUsers";
+		// }
 		if (results.size() > 1) {
 			// multiple users found
 			model.addAttribute("selections", results);
-			String[] cols = { "id", "name", "email" };
+			String[] cols = { "id", "name", "email", "password", "enabled" };
 			DataTableConverter tResults = new DataTableConverter(results, cols);
-			tResults.print();
-			tResults.setColumnAsLink("2.email");
-			tResults.setColumnId("0.id");
+			tResults.setColumnAsLink("email");
+			tResults.setColumnId("id");
 			model.addAttribute("tResults", tResults);
 			return "users/usersList";
 		} else {
@@ -123,18 +144,37 @@ public class UserController {
 	public String initUpdateUserForm(@PathVariable("userId") int userId, Model model) {
 		User user = this.applicationService.findUserById(userId);
 		model.addAttribute(user);
+
+		String[] cols = { "id", "name", "email", "password", "enabled" };
+		DataTableConverter tObject = new DataTableConverter(user, cols);
+		model.addAttribute("tObject", tObject);
+
 		return "users/createOrUpdateUserForm";
 	}
 
 	@RequestMapping(value = "/users/{userId}/edit", method = RequestMethod.PUT)
-	public String processUpdateUserForm(@Valid User user, BindingResult result, SessionStatus status) {
-		if (result.hasErrors()) {
-			return "users/createOrUpdateUserForm";
-		} else {
-			this.applicationService.saveUser(user);
-			status.setComplete();
-			return "redirect:/users/{userId}";
+	public String processUpdateUserForm(@Valid User user, BindingResult result, SessionStatus status, Model model,
+			@RequestParam(value = "action", required = true) String action) {
+		String resp = "";
+
+		switch (action) {
+		case "update":
+			if (result.hasErrors()) {
+				String[] cols = { "id", "name", "email", "password", "enabled" };
+				DataTableConverter tObject = new DataTableConverter(user, cols);
+				model.addAttribute("tObject", tObject);
+				resp = "users/createOrUpdateUserForm";
+			} else {
+				this.applicationService.saveUser(user);
+				status.setComplete();
+				resp = "redirect:/users/{userId}";
+			}
+			break;
+		case "cancel":
+			resp = "redirect:/users/";
+			break;
 		}
+		return resp;
 	}
 
 	/**
@@ -147,7 +187,13 @@ public class UserController {
 	@RequestMapping("/users/{userId}")
 	public ModelAndView showUser(@PathVariable("userId") int userId) {
 		ModelAndView mav = new ModelAndView("users/userDetails");
-		mav.addObject(this.applicationService.findUserById(userId));
+		User user = this.applicationService.findUserById(userId);
+		mav.addObject(user);
+
+		String[] cols = { "id", "name", "email", "password", "enabled" };
+		DataTableConverter tObject = new DataTableConverter(user, cols);
+		mav.addObject("tObject", tObject);
+
 		return mav;
 	}
 

@@ -27,21 +27,22 @@
     <h2>User Information</h2>
 
     <table class="table table-striped" style="width:600px;">
-        <tr>
-            <th>Name</th>
-            <td><b th:text="|${user.name} ${user.email}|">[name email]</b></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td th:text="${user.email}">[email]</td>
-        </tr>
-        <tr>
-            <td> 
-            	<a th:href="@{|${user.id}/edit.html|}" href="./createOrUpdateUserForm.html" class="btn btn-info">Edit User</a></td>
-            <td>
-            	<a th:href="@{|${user.id}/pets/new.html|}" href="../pets/createOrUpdatePetForm.html"  class="btn btn-success">Add New Pet</a></td>
-        </tr>
+	    <div th:each="tRow : ${tObject.table}">
+	        <div th:each="entry : ${tRow}">
+		        <tr>
+		            <th th:text="${tObject.getColumnName('__${entry.key}__')}">columnName</th>
+		            <td><b th:text="|${entry.value}|">[columnValue]</b></td>
+		        </tr>
+		    </div>
+	    </div>
+	    <tr>
+	        <td> 
+	          	<a th:href="@{|${user.id}/edit.html|}" href="./createOrUpdateUserForm.html" class="btn btn-info">Edit</a></td>
+	        <td>
+	          	<a th:href="@{|/users/|}" href="./usersList.html"  class="btn btn-success">List</a></td>
+	    </tr>
     </table>
+
 
 
     

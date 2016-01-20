@@ -28,33 +28,33 @@
 
 
     <h2>
-        <span th::if="${user['new']}" th:remove="tag">New </span> User
+        <span th:if="${user['new']}" th:remove="tag">New </span> User
     </h2>
     <form th:object="${user}" th:method="${user['new']} ? post : put" action="./userDetails.html"
         th:action="@{${#httpServletRequest.servletPath}}" class="form-horizontal" id="add-user-form">
-        <div class="control-group" th:classappend="${#fields.hasErrors('name')} ? error">
-            <label class="control-label">Name</label>
-            <div class="controls">
-                <input type="text" th:field="*{name}" />
-                <span class="help-inline" th:errors="*{name}">[error]</span>
-            </div>
-        </div>
+        
+        <div th:each="columnName : ${tObject.columns}">
+        
+	        <div class="control-group" th:classappend="${#fields.hasErrors('__${columnName}__')} ? error">
+	            <label class="control-label" th:text="${columnName}">columName</label>
+	            <div class="controls">
+	                <input type="text" th:field="*{__${columnName}__}" />
+	                <span class="help-inline" th:errors="*{__${columnName}__}">[error]</span>
+	            </div>
+	        </div>
     
-        <div class="control-group" th:classappend="${#fields.hasErrors('email')} ? error">
-            <label class="control-label">E-mail</label>
-            <div class="controls">
-                <input type="text" th:field="*{email}" />
-                <span class="help-inline" th:errors="*{email}">[error]</span>
-            </div>
-        </div>
-    
-
+		</div>
+		
         <div class="form-actions">
-            <button th:if="${user['new']}" type="submit">Add User</button>
-            <button th:unless="${user['new']}" type="submit">Update User</button>
+            <button name="action" th:if="${user['new']}" type="submit" value="insert">Add</button>
+            <button name="action" th:unless="${user['new']}" type="submit" value="update">Update</button>
+            <button name="action" type="submit" value="cancel">Cancel</button>
         </div>
     </form>
 </div>
+
+
+
 
 <table th:replace="fragments/footer :: footer" class="footer">
     <tr>

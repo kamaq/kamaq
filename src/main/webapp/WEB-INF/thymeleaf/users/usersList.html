@@ -34,8 +34,8 @@
 <div class="container">
 
   
-   <h2>Users</h2>
-    
+   <span> <h2>Users <a th:href="@{'/users/new'}" href="createOrUpdateUserForm.html">[+]</a> </h2> </span> 
+        
    <table id="example" class="display nowrap" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -56,57 +56,6 @@
             </tr>
         </tbody>        
     </table>   
-
-
-<!-- 
-
-            	<div th:each="entry : ${tRow}">
-            	    <td th:text="${entry.value}"
-                		th:if="${not #strings.equalsIgnoreCase(entry.key, tResults.columnAsLink)}">
-                	columnValue</td> 
-                	<a href="userDetails.html"
-	                   th:href="@{|/users/${tRow.get('id')}|}"
-	                   th:text="|${entry.value}|"
-	                   th:if="${#strings.equalsIgnoreCase(entry.key, tResults.columnAsLink)}">columnLink</a> 
-            	</div>
-            	
-
-                <td th:each="entry : ${tRow}" th:text="${entry.value}"
-                th:if="${not #strings.equalsIgnoreCase(entry.key, tResults.columnAsLink)}">
-					<a href="userDetails.html"
-	                   th:href="@{|/users/${entry.value}|}"
-	                   th:text="|${entry.key} ${entry.value}|">columnLink</a>                    
-                columnValue</td> 
-                <td th:each="entry : ${tRow}" 
-                th:if="${#strings.equalsIgnoreCase(entry.key, tResults.columnAsLink)}">
-					<a href="userDetails.html"
-	                   th:href="@{|/users/${tRow.get('id')}|}"
-	                   th:text="|${entry.value}|">columnLink</a>                    
-                </td>
- -->
-
-
-
-    <table id="example" class="display nowrap" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th style="width: 150px;">Name</th>
-                <th style="width: 200px;">Email</th>
-            </tr>	
-        </thead>
-        <tbody>
-            <tr th:each="user : ${selections}">
-                <td>
-                    <a href="userDetails.html"
-                       th:href="@{|/users/${user.id}|}"
-                       th:text="|${user.name} ${user.email}|">Mary Smith</a>
-                </td>
-                <td th:text="${user.email}">45, Oxford Street</td>
-
-
-            </tr>
-        </tbody>
-    </table>    
 
 
     

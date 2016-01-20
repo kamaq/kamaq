@@ -19,20 +19,35 @@ public class DataTableConverter {
 	private List<Map<?, ?>> table;
 	private String columnAsLink;
 	private String columnId;
+	private Object object;
 
 	public DataTableConverter(Collection<?> collection, String[] columns) {
 		this.collection = collection;
 		this.columns = columns;
-		this.convert();
+		this.convertCollection();
 	}
 
-	private void convert() {
+	public DataTableConverter(Object object, String[] columns) {
+		this.object = object;
+		this.columns = columns;
+		this.convertObject();
+	}
+
+	private void convertCollection() {
 		table = new ArrayList<Map<?, ?>>();
 		for (Object row : collection) {
 			Map<String, Object> map = new TreeMap<String, Object>();
 			map = DataTableConverter.getNonNullProperties(row);
 			table.add(map);
 		}
+	}
+
+	private void convertObject() {
+		table = new ArrayList<Map<?, ?>>();
+		Map<String, Object> map = new TreeMap<String, Object>();
+		map = DataTableConverter.getNonNullProperties(this.object);
+		table.add(map);
+
 	}
 
 	public static Map<String, Object> getNonNullProperties(final Object object) {
@@ -46,8 +61,6 @@ public class DataTableConverter {
 						if (propertyValue != null) {
 							String index = Integer.toString(Arrays.asList(columns).indexOf(descriptor.getName()));
 							nonNullProperties.put(index + "." + descriptor.getName(), propertyValue);
-							// nonNullProperties.put(descriptor.getName(),
-							// propertyValue);
 						}
 					}
 				} catch (final IllegalArgumentException e) {
@@ -67,6 +80,10 @@ public class DataTableConverter {
 
 	}
 
+	public String getColumnName(String keyName) {
+		return keyName.substring(keyName.indexOf(".") + 1, keyName.length());
+	}
+
 	public void print() {
 		for (Map<?, ?> row : this.table) {
 			for (Map.Entry<?, ?> entry : row.entrySet()) {
@@ -80,7 +97,8 @@ public class DataTableConverter {
 	}
 
 	public void setColumnId(String columnId) {
-		this.columnId = columnId;
+		int i = Arrays.asList(this.columns).indexOf(columnId);
+		this.columnId = Integer.toString(i) + "." + columnId;
 	}
 
 	public String getColumnAsLink() {
@@ -88,7 +106,8 @@ public class DataTableConverter {
 	}
 
 	public void setColumnAsLink(String columnAsLink) {
-		this.columnAsLink = columnAsLink;
+		int i = Arrays.asList(this.columns).indexOf(columnAsLink);
+		this.columnAsLink = Integer.toString(i) + "." + columnAsLink;
 	}
 
 	public String[] getColumns() {

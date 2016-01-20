@@ -34,7 +34,7 @@ public class Test {
 		String[] cols = { "id", "name", "email" };
 
 		DataTableConverter conv = new DataTableConverter(users, cols);
-		conv.print();
+		// conv.print();
 		// List<Map<?, ?>> tabla = conv.getTable();
 
 		// for (Map<?, ?> row : tabla) {
@@ -42,6 +42,9 @@ public class Test {
 		// System.out.println(entry.getKey() + " : " + entry.getValue());
 		// }
 		// }
+
+		String s = "0.id";
+		System.out.println(s.substring(s.indexOf(".") + 1, s.length()));
 	}
 
 }
