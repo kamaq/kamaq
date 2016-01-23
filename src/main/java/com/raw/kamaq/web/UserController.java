@@ -101,29 +101,11 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/users/find", method = RequestMethod.GET)
-	public String initFindForm(Model model) {
-		model.addAttribute("user", new User());
-		return "users/findUsers";
-	}
-
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String processFindForm(User user, BindingResult result, Model model) {
 
-		// allow parameterless GET request for /users to return all records
-		// if (user.getName() == null) {
-		// user.setName(""); // empty string signifies broadest possible search
-		// }
-
-		// find users by name
-		// Collection<User> results =
-		// this.applicationService.findUserByName(user.getName());
 		Collection<User> results = this.applicationService.findUserByName("");
-		// if (results.size() < 1) {
-		// no users found
-		// result.rejectValue("name", "notFound", "not found");
-		// return "users/findUsers";
-		// }
+
 		if (results.size() > 1) {
 			// multiple users found
 			model.addAttribute("selections", results);
@@ -140,20 +122,58 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "/users/{userId}/edit", method = RequestMethod.GET)
-	public String initUpdateUserForm(@PathVariable("userId") int userId, Model model) {
+	/**
+	 * Custom handler for displaying an owner.
+	 *
+	 * @param ownerId
+	 *            the ID of the owner to display
+	 * @return a ModelMap with the model attributes for the view
+	 */
+	@RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
+	public ModelAndView showUser(@PathVariable("userId") int userId) {
+		ModelAndView mav = new ModelAndView("users/userDetails");
 		User user = this.applicationService.findUserById(userId);
-		model.addAttribute(user);
+		mav.addObject(user);
+
+		String[] cols = { "id", "name", "email", "password", "enabled" };
+		DataTableConverter tObject = new DataTableConverter(user, cols);
+		mav.addObject("tObject", tObject);
+
+		String[] buttons = { "edit", "delete", "enable", "detail" };
+		mav.addObject("tButtons", buttons);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/users/{userId}", method = RequestMethod.POST)
+	public String editData(@PathVariable("userId") int userId,
+			@RequestParam(value = "action", required = true) String action, Model model) {
+
+		String resp = "users/userDetails";
+		User user = this.applicationService.findUserById(userId);
+		model.addAttribute("user", user);
 
 		String[] cols = { "id", "name", "email", "password", "enabled" };
 		DataTableConverter tObject = new DataTableConverter(user, cols);
 		model.addAttribute("tObject", tObject);
 
-		return "users/createOrUpdateUserForm";
+		String[] buttons = { "edit", "delete", "enable", "detail" };
+		model.addAttribute("tButtons", buttons);
+
+		switch (action) {
+		case "edit":
+			System.out.println(action);
+			resp = "users/createOrUpdateUserForm";
+			break;
+		case "delete":
+			System.out.println(action);
+			break;
+		}
+		return resp;
 	}
 
-	@RequestMapping(value = "/users/{userId}/edit", method = RequestMethod.PUT)
-	public String processUpdateUserForm(@Valid User user, BindingResult result, SessionStatus status, Model model,
+	@RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)
+	public String updateData(@Valid User user, BindingResult result, SessionStatus status, Model model,
 			@RequestParam(value = "action", required = true) String action) {
 		String resp = "";
 
@@ -171,30 +191,10 @@ public class UserController {
 			}
 			break;
 		case "cancel":
-			resp = "redirect:/users/";
+			resp = "redirect:/users/{userId}";
 			break;
 		}
 		return resp;
-	}
-
-	/**
-	 * Custom handler for displaying an owner.
-	 *
-	 * @param ownerId
-	 *            the ID of the owner to display
-	 * @return a ModelMap with the model attributes for the view
-	 */
-	@RequestMapping("/users/{userId}")
-	public ModelAndView showUser(@PathVariable("userId") int userId) {
-		ModelAndView mav = new ModelAndView("users/userDetails");
-		User user = this.applicationService.findUserById(userId);
-		mav.addObject(user);
-
-		String[] cols = { "id", "name", "email", "password", "enabled" };
-		DataTableConverter tObject = new DataTableConverter(user, cols);
-		mav.addObject("tObject", tObject);
-
-		return mav;
 	}
 
 }
